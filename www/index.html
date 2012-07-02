@@ -1,0 +1,93 @@
+<!DOCTYPE html> 
+<html> 
+	<head> 
+	<title>My Page</title> 
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css" />
+	<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>
+<script type="text/javascript" src="http://sdk.cocoafish.com/js/cocoafish-1.2.min.js"></script>
+</head> 
+<body> 
+
+<div data-role="page">
+
+	<div data-role="header">
+		<h1>Ti Cloud API in PhoneGap</h1>
+	</div><!-- /header -->
+
+	<div data-role="content">	
+		<label for="email">Email:</label>
+    	<input type="email" name="email" id="email" value=""  />
+    	
+    	<label for="fName">First Name:</label>
+    	<input type="text" name="fName" id="fName" value=""  />
+    	
+    	<label for="lName">Last Name:</label>
+    	<input type="text" name="lName" id="lName" value=""  />
+    	
+    	<label for="password">Password:</label>
+    	<input type="password" name="password" id="password" value=""  />
+    	
+    	
+    	<label for="cPassword">Confirm Password:</label>
+    	<input type="password" name="cPassword" id="cPassword" value=""  />
+    	
+    	<a href="#" data-role="button" data-inline="true" data-theme="b" id="btnSave">Save</a>
+    		
+	</div><!-- /content -->
+
+</div><!-- /page -->
+
+
+<script>
+    //APP key
+    //var sdk = new Cocoafish('/***YOUR ACS APP KEY HERE***/');
+    
+/*IF oAuth Consumer key and Secret key*/
+   var sdk = new Cocoafish('/***oAuth Consumer KEY HERE***/','/***oAuth Secret KEY HERE***/');
+
+
+function callback(data) {
+  if(data) {
+    if(data.meta){
+      var meta = data.meta;
+      if(meta.status == 'ok' && meta.code == 200 && meta.method_name == 'createUser') {
+        var message = '';
+        var user = data.response.users[0];
+        message += 'Create user successful!\n';
+        message += 'id:' + user.id + '\n';
+        message += 'first name:' + user.first_name + '\n';
+        message += 'last name:' + user.last_name + '\n';
+        message += 'email:' + user.email + '\n';
+        alert(message);
+        return false;
+      }
+    }
+  }
+
+  alert('Sorry! something went wrong.');
+  
+}
+
+
+
+jQuery('#btnSave').live('click',function(e){
+
+	var data = {
+			  email: jQuery('#email').val(), 
+			  first_name: jQuery('#fName').val(), 
+			  last_name:jQuery('#lName').val(), 
+			  password: jQuery('#password').val(),  
+			  password_confirmation: jQuery('#cPassword').val()
+			};
+	
+	sdk.sendRequest('users/create.json', 'POST', data, callback);
+});
+
+
+</script>
+
+
+</body>
+</html>
