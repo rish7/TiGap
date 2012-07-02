@@ -14,3 +14,6 @@ E.g:- sdk.sendRequest('users/create.json', 'POST', data, callback);
 
 Check more details here
 
+
+http://shareourideas.com/2012/07/02/ti-acs-api-in-phonegap/ 
+
