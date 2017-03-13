@@ -1,7 +1,7 @@
 TiGap
-=====
-
+--------------
 Titanium ACS API from PhoneGap Application (only index.html)
+
 ![APPC ACS in Phone Gap](http://shareourideas.com/wp-content/uploads/2012/07/ui-in-phonegap.png)
 1) First Login to Titanium Colud and Create ACS app
 2) Copy Oauth Consumer key and Secret Key or App Key
